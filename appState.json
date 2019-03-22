@@ -1,0 +1,116 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "64142bf8-79e5-4d60-85fa-259122735a1c": {
+        "id": "64142bf8-79e5-4d60-85fa-259122735a1c",
+        "parent": null,
+        "name": "Test462",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "144d08b5-091c-4128-9e5d-825ec2d9b3db"
+        ],
+        "isRemovable": false,
+        "filePath": "Test462"
+      },
+      "144d08b5-091c-4128-9e5d-825ec2d9b3db": {
+        "id": "144d08b5-091c-4128-9e5d-825ec2d9b3db",
+        "parent": "64142bf8-79e5-4d60-85fa-259122735a1c",
+        "name": "lambda.js",
+        "type": "LAMBDA_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "Test462/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n\n    let op = event['op'];\n\n    if (op === 'add') {\n        ddb.put({\n            TableName: '462DDB',\n            Item: { 'name': 'mike' }\n        }).promise()\n            .then((data) => {\n                console.log(\"Successfully added user\");\n                callback(null, \"Successfully added user\");\n            })\n            .catch((err) => {\n                console.log(\"Failed to add user\");\n                callback(err);\n            });\n    } else if (op === 'delete') {\n        ddb.delete({\n            TableName: '462DDB',\n            Key: { 'name': 'mike' }\n        }).promise()\n            .then((data) => {\n                console.log(\"Successfully deleted user\");\n                callback(null, \"Successfully deleted user\");\n            })\n            .catch((err) => {\n                console.log(\"Failed to delete user\");\n                callback(err);\n            });\n    } else {\n        callback(\"Invalid operation\");\n    }\n}",
+        "triggers": [],
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        }
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "64142bf8-79e5-4d60-85fa-259122735a1c",
+    "openFiles": [
+      "144d08b5-091c-4128-9e5d-825ec2d9b3db"
+    ],
+    "currentFileId": "144d08b5-091c-4128-9e5d-825ec2d9b3db",
+    "resources": {
+      "ddb462DDB": {
+        "name": "ddb462DDB",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "operation": "delete",
+          "table": {
+            "arn": "",
+            "name": "462DDB",
+            "partitionKey": "name",
+            "partitionKeyType": "S",
+            "hasSortKey": false,
+            "sortKey": "",
+            "sortKeyType": "S",
+            "mode": 0
+          },
+          "parameters": {
+            "Key": {
+              "name": "mike"
+            },
+            "Item": {},
+            "ExpressionAttributeValues": {}
+          },
+          "triggerParams": {},
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "version": "2.176.0",
+          "dev": true,
+          "notRemovable": false
+        }
+      }
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "Test462",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1553231645971
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "Test462",
+      "url": "https://github.com/sigmaidetest/Test462"
+    }
+  }
+}
